@@ -1,0 +1,130 @@
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'example.stationary',
+    indexFilterSet: false,
+    parsedQuery: { date_utc: { '$eq': '2019-11-11 12:00:00' } },
+    queryHash: 'F95A3B18',
+    planCacheKey: 'F95A3B18',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'SORT',
+      sortPattern: { no2_ugm3: 1 },
+      memLimit: 104857600,
+      type: 'simple',
+      inputStage: {
+        stage: 'PROJECTION_SIMPLE',
+        transformBy: {
+          _id: 0,
+          location_name: 1,
+          date_utc: 1,
+          pm2_5_ugm3: 1,
+          ratification_status_pm2_5: 1,
+          no2_ugm3: 1,
+          ratification_status_no2: 1
+        },
+        inputStage: {
+          stage: 'COLLSCAN',
+          filter: { date_utc: { '$eq': '2019-11-11 12:00:00' } },
+          direction: 'forward'
+        }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 89,
+    executionTimeMillis: 626,
+    totalKeysExamined: 0,
+    totalDocsExamined: 757357,
+    executionStages: {
+      stage: 'SORT',
+      nReturned: 89,
+      executionTimeMillisEstimate: 35,
+      works: 757449,
+      advanced: 89,
+      needTime: 757359,
+      needYield: 0,
+      saveState: 757,
+      restoreState: 757,
+      isEOF: 1,
+      sortPattern: { no2_ugm3: 1 },
+      memLimit: 104857600,
+      type: 'simple',
+      totalDataSizeSorted: 17599,
+      usedDisk: false,
+      spills: 0,
+      inputStage: {
+        stage: 'PROJECTION_SIMPLE',
+        nReturned: 89,
+        executionTimeMillisEstimate: 32,
+        works: 757359,
+        advanced: 89,
+        needTime: 757269,
+        needYield: 0,
+        saveState: 757,
+        restoreState: 757,
+        isEOF: 1,
+        transformBy: {
+          _id: 0,
+          location_name: 1,
+          date_utc: 1,
+          pm2_5_ugm3: 1,
+          ratification_status_pm2_5: 1,
+          no2_ugm3: 1,
+          ratification_status_no2: 1
+        },
+        inputStage: {
+          stage: 'COLLSCAN',
+          filter: { date_utc: { '$eq': '2019-11-11 12:00:00' } },
+          nReturned: 89,
+          executionTimeMillisEstimate: 32,
+          works: 757359,
+          advanced: 89,
+          needTime: 757269,
+          needYield: 0,
+          saveState: 757,
+          restoreState: 757,
+          isEOF: 1,
+          direction: 'forward',
+          docsExamined: 757357
+        }
+      }
+    }
+  },
+  command: {
+    find: 'stationary',
+    filter: { date_utc: '2019-11-11 12:00:00' },
+    sort: { no2_ugm3: 1 },
+    projection: {
+      _id: 0,
+      location_name: 1,
+      date_utc: 1,
+      pm2_5_ugm3: 1,
+      ratification_status_pm2_5: 1,
+      no2_ugm3: 1,
+      ratification_status_no2: 1
+    },
+    '$db': 'example'
+  },
+  serverInfo: {
+    host: 'leont-VirtualBox',
+    port: 27017,
+    version: '6.0.3',
+    gitVersion: 'f803681c3ae19817d31958965850193de067c516'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}

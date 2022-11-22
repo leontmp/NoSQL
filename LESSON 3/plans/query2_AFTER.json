@@ -1,0 +1,172 @@
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'example.stationary',
+    indexFilterSet: false,
+    parsedQuery: { date_utc: { '$regex': '/*10:00:00*' } },
+    queryHash: 'E6CCC6D4',
+    planCacheKey: '5AD5454D',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'SORT',
+      sortPattern: { no2_ugm3: 1 },
+      memLimit: 104857600,
+      type: 'simple',
+      inputStage: {
+        stage: 'PROJECTION_SIMPLE',
+        transformBy: {
+          _id: 0,
+          location_name: 1,
+          date_utc: 1,
+          pm2_5_ugm3: 1,
+          ratification_status_pm2_5: 1,
+          no2_ugm3: 1,
+          ratification_status_no2: 1
+        },
+        inputStage: {
+          stage: 'FETCH',
+          inputStage: {
+            stage: 'IXSCAN',
+            filter: { date_utc: { '$regex': '/*10:00:00*' } },
+            keyPattern: { date_utc: 1 },
+            indexName: 'date_utc_1',
+            isMultiKey: false,
+            multiKeyPaths: { date_utc: [] },
+            isUnique: false,
+            isSparse: false,
+            isPartial: false,
+            indexVersion: 2,
+            direction: 'forward',
+            indexBounds: {
+              date_utc: [ '["", {})', '[//*10:00:00*/, //*10:00:00*/]' ]
+            }
+          }
+        }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 31518,
+    executionTimeMillis: 1503,
+    totalKeysExamined: 757357,
+    totalDocsExamined: 31518,
+    executionStages: {
+      stage: 'SORT',
+      nReturned: 31518,
+      executionTimeMillisEstimate: 159,
+      works: 788877,
+      advanced: 31518,
+      needTime: 757358,
+      needYield: 0,
+      saveState: 788,
+      restoreState: 788,
+      isEOF: 1,
+      sortPattern: { no2_ugm3: 1 },
+      memLimit: 104857600,
+      type: 'simple',
+      totalDataSizeSorted: 6059958,
+      usedDisk: false,
+      spills: 0,
+      inputStage: {
+        stage: 'PROJECTION_SIMPLE',
+        nReturned: 31518,
+        executionTimeMillisEstimate: 147,
+        works: 757358,
+        advanced: 31518,
+        needTime: 725839,
+        needYield: 0,
+        saveState: 788,
+        restoreState: 788,
+        isEOF: 1,
+        transformBy: {
+          _id: 0,
+          location_name: 1,
+          date_utc: 1,
+          pm2_5_ugm3: 1,
+          ratification_status_pm2_5: 1,
+          no2_ugm3: 1,
+          ratification_status_no2: 1
+        },
+        inputStage: {
+          stage: 'FETCH',
+          nReturned: 31518,
+          executionTimeMillisEstimate: 139,
+          works: 757358,
+          advanced: 31518,
+          needTime: 725839,
+          needYield: 0,
+          saveState: 788,
+          restoreState: 788,
+          isEOF: 1,
+          docsExamined: 31518,
+          alreadyHasObj: 0,
+          inputStage: {
+            stage: 'IXSCAN',
+            filter: { date_utc: { '$regex': '/*10:00:00*' } },
+            nReturned: 31518,
+            executionTimeMillisEstimate: 120,
+            works: 757358,
+            advanced: 31518,
+            needTime: 725839,
+            needYield: 0,
+            saveState: 788,
+            restoreState: 788,
+            isEOF: 1,
+            keyPattern: { date_utc: 1 },
+            indexName: 'date_utc_1',
+            isMultiKey: false,
+            multiKeyPaths: { date_utc: [] },
+            isUnique: false,
+            isSparse: false,
+            isPartial: false,
+            indexVersion: 2,
+            direction: 'forward',
+            indexBounds: {
+              date_utc: [ '["", {})', '[//*10:00:00*/, //*10:00:00*/]' ]
+            },
+            keysExamined: 757357,
+            seeks: 1,
+            dupsTested: 0,
+            dupsDropped: 0
+          }
+        }
+      }
+    }
+  },
+  command: {
+    find: 'stationary',
+    filter: { date_utc: { '$regex': '/*10:00:00*' } },
+    sort: { no2_ugm3: 1 },
+    projection: {
+      _id: 0,
+      location_name: 1,
+      date_utc: 1,
+      pm2_5_ugm3: 1,
+      ratification_status_pm2_5: 1,
+      no2_ugm3: 1,
+      ratification_status_no2: 1
+    },
+    '$db': 'example'
+  },
+  serverInfo: {
+    host: 'leont-VirtualBox',
+    port: 27017,
+    version: '6.0.3',
+    gitVersion: 'f803681c3ae19817d31958965850193de067c516'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}

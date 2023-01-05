@@ -1,6 +1,9 @@
 ﻿**1. Построить шардированный кластер из 3 кластерных нод (по 3 инстанса с репликацией) и с кластером конфига (3 инстанса);**
+ 
 **2. Добавить балансировку, нагрузить данными, выбрать хороший ключ шардирования, посмотреть как данные перебалансируются между шардами;**
+
 **3. Поронять разные инстансы, посмотреть, что будет происходить, поднять обратно. Описать что произошло.**
+
 **4. Настроить аутентификацию и многоролевой доступ;**
 
 Шардированный кластер будем делать с помощью docker’а.
@@ -16,7 +19,7 @@ sudo mkdir /home/mongo_cluster/{vm1_RSconf,vm2_RSconf,vm3_RSconf,vm1_RS1,vm2_RS1
 sudo chmod 777 /home/mongo_cluster/{vm1_RSconf,vm2_RSconf,vm3_RSconf,vm1_RS1,vm2_RS1,vm3_RS1,vm1_RS2,vm2_RS2,vm3_RS2,vm1_RS3,vm2_RS3,vm3_RS3,vm3_mongos,vm4_mongos}
 ```
 
-Генерируем ключ авторизации (аутентификация шардированного кластера без него не пройдет). После генерации раскладываем его по папкам, в которые будут писать контейнеры (файлу обязательно нужно проставить права уровня __«только владелец файла может читать/записывать»__ (иначе словим ошибку _«permissions on /data/key.file are too open»_), кроме того владельца меняем на __vboxadd__ (поскольку контейнеры докера запускаются под ним).
+Генерируем ключ авторизации (аутентификация шардированного кластера без него не пройдет). После генерации раскладываем его по папкам, в которые будут писать контейнеры (файлу обязательно нужно проставить права уровня __«только владелец файла может читать/записывать»__ (иначе словим ошибку _«permissions on /data/key.file are too open»_), кроме того, владельца меняем на __vboxadd__ (поскольку контейнеры докера запускаются под ним).
 ```
 openssl rand -base64 756 > key.file
 for dest in /home/mongo_cluster/{vm1_RSconf,vm2_RSconf,vm3_RSconf,vm1_RS1,vm2_RS1,vm3_RS1,vm1_RS2,vm2_RS2,vm3_RS2,vm1_RS3,vm2_RS3,vm3_RS3,vm3_mongos,vm4_mongos};
@@ -27,7 +30,7 @@ done;
 
 ## Авторизация
 
-В каждом репликасете один узел запускается как standalone-узел (т.е без параметров _--replSet, --configsvr, --shardsvr_) с авторизацией через параметры предопределенные контейнера __MONGO_INITDB_ROOT_USERNAME__, __MONGO_INITDB_ROOT_PASSWORD__. Только так удается зайти и прописать новых пользователей, которые потом раскопируются по другим узлам репликасета.
+В каждом репликасете один узел запускается как standalone-узел (т.е без параметров _--replSet, --configsvr, --shardsvr_) с авторизацией через параметры предопределенные контейнером __MONGO_INITDB_ROOT_USERNAME__, __MONGO_INITDB_ROOT_PASSWORD__. Только так удается зайти и прописать новых пользователей, которые потом раскопируются по другим узлам репликасета.
 
 Запускаем [docker-compose.yml](docker-compose.yml)
 
@@ -52,6 +55,23 @@ for i in {1..3};
 done;
 ```
 Проверяем, что запустились ```docker ps -a```
+```
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                                    NAMES
+bc31f8d329ac   mongo:6.0.3   "docker-entrypoint.s…"   34 minutes ago   Up 3 minutes   27017/tcp, 127.0.0.10:27030->27018/tcp   vm1_RS3
+214c4ea27b30   mongo:6.0.3   "docker-entrypoint.s…"   34 minutes ago   Up 3 minutes   27017/tcp, 127.0.0.10:27020->27018/tcp   vm1_RS2
+a911ab04cca7   mongo:6.0.3   "docker-entrypoint.s…"   34 minutes ago   Up 3 minutes   27017/tcp, 127.0.0.10:27010->27018/tcp   vm1_RS1
+5daef0d9123a   mongo:6.0.3   "docker-entrypoint.s…"   34 minutes ago   Up 3 minutes   27017/tcp, 127.0.0.10:27001->27019/tcp   vm1_RSconf
+786f1360c03c   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   127.0.0.30:27000->27017/tcp              vm3_mongos
+d46ae4e5b9e6   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   127.0.0.40:27000->27017/tcp              vm4_mongos
+48e5bed6bab5   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.20:27020->27018/tcp   vm2_RS2
+238a06a6d4b6   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.30:27020->27018/tcp   vm3_RS2
+b02d1add1cdc   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.20:27001->27019/tcp   vm2_RSconf
+27c122646d59   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.20:27010->27018/tcp   vm2_RS1
+1cb517154908   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.30:27030->27018/tcp   vm3_RS3
+43aa2e9a5c0f   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.20:27030->27018/tcp   vm2_RS3
+238523ca72a5   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.30:27010->27018/tcp   vm3_RS1
+bb52c145fdb8   mongo:6.0.3   "docker-entrypoint.s…"   35 minutes ago   Up 35 minutes   27017/tcp, 127.0.0.30:27001->27019/tcp   vm3_RSconf
+```
 
 Инициируем сами репликасеты: __RSconf, RS1, RS2, RS3__.
 ```
@@ -114,15 +134,17 @@ use admin
 sh.shardCollection("stationary.data",{latitude: 1, longitude: 1})
 sh.status()
 ```
-> collections: {
+Чанки разъехались 8-1-8.
+```
+collections: {
 	'stationary.data': {
-	__shardKey: { latitude: 1, longitude: 1 },__
+	shardKey: { latitude: 1, longitude: 1 },
 	unique: false,
 	balancing: true,
 	chunkMetadata: [
-		__{ shard: 'RS1', nChunks: 8 },__
-		__{ shard: 'RS2', nChunks: 1 },__
-		__{ shard: 'RS3', nChunks: 8 }__
+		{ shard: 'RS1', nChunks: 8 },
+		{ shard: 'RS2', nChunks: 1 },
+		{ shard: 'RS3', nChunks: 8 }
 	],
 	chunks: [
 		{ min: { latitude: MinKey(), longitude: MinKey() }, max: { latitude: 51.42661, longitude: -0.345043 }, 'on shard': 'RS3', 'last modified': Timestamp({ t: 2, i: 0 }) },
@@ -145,38 +167,38 @@ sh.status()
 	],
 	tags: []
 }
-
-Чанки разъехались 8-1-8.
+```
+Проверяем суммарное кол-во записей в только что шардированной коллекции.
 ```
 use stationary
 db.data.find().count()
 ```
 Первое время показывает 1227257 записей. Если запросим статистику ```db.stats()```, то увидим, что данные по __RS1__ и __RS3__ разъехались, но на __RS2__ еще избыточные не удалились.
-
->{
+```
+{
 raw: {
 	'RS3/vm1_RS3:27018,vm2_RS3:27018,vm3_RS3:27018': {
 		db: 'stationary',
 		collections: 1,
 		views: 0,
-		__objects: 230862,__
+		objects: 230862,
 	},
   'RS1/vm1_RS1:27018,vm2_RS1:27018,vm3_RS1:27018': {
 		db: 'stationary',
 		collections: 1,
 		views: 0,
-		__objects: 239038,__
+		objects: 239038,
 	},
 	'RS2/vm1_RS2:27018,vm2_RS2:27018,vm3_RS2:27018': {
 		db: 'stationary',
 		collections: 1,
 		views: 0,
-		__objects: 757357,__
+		objects: 757357,
 	}
 },
-__objects: 1227257,__
+objects: 1227257,
 }
-
+```
 Через какое-то время ```db.data.find().count()``` вернет корректное 757357, а ```db.stats()``` покажет что на __RS2__ осталось 287457 записей. Балансировка окончена.
 
 Сразу создадим пользователей с урезанными правами для работы с БД stationary.
@@ -189,7 +211,7 @@ db.createUser({user: "UserAdminDatabase",pwd: "Passw0rd!", roles: [ { role: "dbO
 ```
 
 ## Моделируем ситуацию с падением нод
-
+### Падение нод репликасета с данными
 Останавливаем 2 из 3-х нод репликасета __RS3__: 
 ```
 docker stop vm1_RS3 && docker stop vm2_RS3
@@ -198,30 +220,33 @@ mongosh --host 127.0.0.40 --port 27000 -u "UserReadWite" -p "Passw0rd!" --authen
 
 use stationary
 db.data.aggregate([{$group: {_id: '$latitude', totalrecords: {$sum: 1}}}, {$sort: {'_id': 1}}])
-```
+
 > MongoServerError: Could not find host matching read preference { mode: "primary" } for set RS3
 > lastHeartbeatMessage: 'Error connecting to vm1_RS3:27018 :: caused by :: Could not find address for vm1_RS3:27018: SocketException: Host not found (non-authoritative), try again later',
-
+```
 Если зайти на __RS3__ и посмотреть ```rs.status()```, то оставшийся живым узел не может выполнять функцию primary-ноды (перешел в статус secondary).
-
->name: 'vm3_RS3:27018',
+```
+name: 'vm3_RS3:27018',
 stateStr: 'SECONDARY',
-
-Заходим в _mongos.log_  файл ноды __vm3_RS3__ и видим, что сыпется:
-
-> {"t":{"$date":"2023-01-04T10:58:20.264+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"RS3","host":"vm1_RS3:27018","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm1_RS3:27018 :: caused by :: Could not find address for vm1_RS3:27018: SocketException: Host not found (non-authoritative), try again later"},"action":{"dropConnections":true,"requestImmediateCheck":true}}}
->
->{"t":{"$date":"2023-01-04T10:58:20.284+00:00"},"s":"I",  "c":"REPL_HB",  "id":23974,  "ctx":"ReplCoord-8","msg":"Heartbeat failed after max retries","attr":{"target":"vm2_RS3:27018","maxHeartbeatRetries":2,"error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm2_RS3:27018 :: caused by :: Could not find address for vm2_RS3:27018: SocketException: Host not found (non-authoritative), try again later"}}}
-> 
-> {"t":{"$date":"2023-01-04T10:58:20.285+00:00"},"s":"I",  "c":"REPL_HB",  "id":23974,  "ctx":"ReplCoord-11","msg":"Heartbeat failed after max retries","attr":{"target":"vm1_RS3:27018","maxHeartbeatRetries":2,"error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm1_RS3:27018 :: caused by :: Could not find address for vm1_RS3:27018: SocketException: Host not found (non-authoritative), try again later"}}}
-
+```
+Заходим в _mongod.log_  файл ноды __vm3_RS3__ и видим, что сыпется:
+```
+{"t":{"$date":"2023-01-04T10:58:20.264+00:00"},"s":"I",  "c":"NETWORK",  "id":4712102, "ctx":"ReplicaSetMonitor-TaskExecutor","msg":"Host failed in replica set","attr":{"replicaSet":"RS3","host":"vm1_RS3:27018","error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm1_RS3:27018 :: caused by :: Could not find address for vm1_RS3:27018: SocketException: Host not found (non-authoritative), try again later"},"action":{"dropConnections":true,"requestImmediateCheck":true}}}
+{"t":{"$date":"2023-01-04T10:58:20.284+00:00"},"s":"I",  "c":"REPL_HB",  "id":23974,  "ctx":"ReplCoord-8","msg":"Heartbeat failed after max retries","attr":{"target":"vm2_RS3:27018","maxHeartbeatRetries":2,"error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm2_RS3:27018 :: caused by :: Could not find address for vm2_RS3:27018: SocketException: Host not found (non-authoritative), try again later"}}}
+{"t":{"$date":"2023-01-04T10:58:20.285+00:00"},"s":"I",  "c":"REPL_HB",  "id":23974,  "ctx":"ReplCoord-11","msg":"Heartbeat failed after max retries","attr":{"target":"vm1_RS3:27018","maxHeartbeatRetries":2,"error":{"code":6,"codeName":"HostUnreachable","errmsg":"Error connecting to vm1_RS3:27018 :: caused by :: Could not find address for vm1_RS3:27018: SocketException: Host not found (non-authoritative), try again later"}}}
+```
 Поднимаем ```docker start vm2_RS3```. Сразу __RS3__ возвращается в строй, __vm3_RS3__ выбран как primary-узел, можно работать с БД (не смотря на то, что __vm1_RS3__ остался в статусе unhealthy).
-
-Если останавливаем 2 ноды __RSconf__ репликасета, где хранятся конфиги, то на команду ```sh.status()``` получаем:
+### Падение нод репликасета с конфигами
+Если останавливаем 2 ноды __RSconf__ репликасета, где хранятся конфиги, то на стутус шардированного кластера получаем:
+```
+sh.status()
 
 > MongoServerError: Encountered non-retryable error during query :: caused by :: Could not find host matching read preference { mode: "primary" } for set RSconf
-
+```
 С двумя живыми нодами __RSconf__  проблема исчезает ```sh.status()``` откликается актуальным статусом.
+
+
+
 
 По окончании тестирования останавливаем запущенные контейнеры, чистим ресурсы.
 ```

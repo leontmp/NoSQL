@@ -1,0 +1,171 @@
+networks:
+  net0:
+    driver: bridge
+
+services:
+  # config servers
+  vm1_RSconf:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.10:27001:27019"
+    container_name: vm1_RSconf
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm1_RSconf:/data
+    command: "mongod --dbpath /data --logpath /data/mongod.log --port 27019 --keyFile /data/key.file --bind_ip localhost,vm1_RSconf"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userRoot
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
+  vm2_RSconf:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.20:27001:27019"
+    container_name: vm2_RSconf
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm2_RSconf:/data
+    command: "mongod --replSet RSconf --configsvr --dbpath /data --logpath /data/mongod.log --port 27019 --keyFile /data/key.file --auth --bind_ip localhost,vm2_RSconf"
+  vm3_RSconf:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.30:27001:27019"
+    container_name: vm3_RSconf
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm3_RSconf:/data
+    command: "mongod --replSet RSconf --configsvr --dbpath /data --logpath /data/mongod.log --port 27019 --keyFile /data/key.file --auth --bind_ip localhost,vm3_RSconf"
+  # ReplicaSet 1
+  vm1_RS1:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.10:27010:27018"
+    container_name: vm1_RS1
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm1_RS1:/data
+    command: "mongod --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --bind_ip localhost,vm1_RS1"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userRoot
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
+  vm2_RS1:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.20:27010:27018"
+    container_name: vm2_RS1
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm2_RS1:/data
+    command: "mongod --replSet RS1 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm2_RS1"
+  vm3_RS1:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.30:27010:27018"
+    container_name: vm3_RS1
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm3_RS1:/data
+    command: "mongod --replSet RS1 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm3_RS1"
+  # ReplicaSet 2
+  vm1_RS2:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.10:27020:27018"
+    container_name: vm1_RS2
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm1_RS2:/data
+    command: "mongod --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --bind_ip localhost,vm1_RS2"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userRoot
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
+  vm2_RS2:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.20:27020:27018"
+    container_name: vm2_RS2
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm2_RS2:/data
+    command: "mongod --replSet RS2 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm2_RS2"
+  vm3_RS2:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.30:27020:27018"
+    container_name: vm3_RS2
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm3_RS2:/data
+    command: "mongod --replSet RS2 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm3_RS2"
+  # ReplicaSet 3
+  vm1_RS3:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.10:27030:27018"
+    container_name: vm1_RS3
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm1_RS3:/data
+    command: "mongod --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --bind_ip localhost,vm1_RS3"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userRoot
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
+  vm2_RS3:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.20:27030:27018"
+    container_name: vm2_RS3
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm2_RS3:/data
+    command: "mongod --replSet RS3 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm2_RS3"
+  vm3_RS3:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.30:27030:27018"
+    container_name: vm3_RS3
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm3_RS3:/data
+    command: "mongod --replSet RS3 --shardsvr --dbpath /data --logpath /data/mongod.log --port 27018 --keyFile /data/key.file --auth --bind_ip localhost,vm3_RS3"
+  # mongos 1
+  vm4_mongos:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.40:27000:27017"
+    container_name: vm4_mongos
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm4_mongos:/data
+    depends_on:
+      - vm1_RSconf
+      - vm2_RSconf
+      - vm3_RSconf
+    command: "mongos --configdb RSconf/vm1_RSconf:27019,vm2_RSconf:27019,vm3_RSconf:27019 --logpath /data/mongos.log --port 27017 -keyFile /data/key.file --bind_ip localhost,vm4_mongos"
+  # mongos 2
+  vm3_mongos:
+    image: mongo:6.0.3
+    ports:
+      - "127.0.0.30:27000:27017"
+    container_name: vm3_mongos
+    networks:
+      - "net0"
+    volumes:
+      - /home/mongo_cluster/vm3_mongos:/data
+    depends_on:
+      - vm1_RSconf
+      - vm2_RSconf
+      - vm3_RSconf
+    command: "mongos --configdb RSconf/vm1_RSconf:27019,vm2_RSconf:27019,vm3_RSconf:27019 --logpath /data/mongos.log --port 27017 -keyFile /data/key.file --bind_ip localhost,vm3_mongos"

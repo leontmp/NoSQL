@@ -1,0 +1,220 @@
+[
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Republic",
+      "date": "-157",
+      "description": "The Carthaginians, prevented by their treaty with Rome from engaging in armed resistance, but equally guaranteed against any loss of territory, appeal to Rome against the depredations of King Masinissa of Numidia. The Roman censor Marcus Porcius Cato heads a commission which arbitrates a truce between Carthage and her former ally, Masinissa.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "866636f6-96e2-40a3-bc54-af615dd52012"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "523",
+      "description": "King Chlothar I takes part in a expedition against Burgundy and captures the town of Autun. Now about 26, he makes plans to expand his territory he inherited from his late father, Clovis I.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "04b4830e-4905-4f13-9620-0e5eab1fd7bd"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "368",
+      "description": "Spring ampampndash Emperor Valentinian I and his 8-year-old son Gratian, cross the Rhine with an army into Alamannic territory. He defeats the Alemanni and burns food stores along the border. A temporary peace is signed  with Macrian, king of the Bucinobantes, and Valentinian returns to his capital ''Augusta Treverorum'' (modern Trier).",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "7823a6c5-85f8-49ce-bf23-5e0fa7a0e6ad"
+  },
+  {
+    "_default": {
+      "category1": "January&amp;amp;amp;ndash;June",
+      "date": "1700/02/12",
+      "description": " The Great Northern War begins with a joint invasion of Swedish territory in Germany and Latvia by Denmark and Poland/Saxony. Sweden has control of the Baltic Sea and holds territory that includes Finland, Estonia, Latvia and parts of northern Germany. To challenge its power, an alliance is formed between Tsar Peter I of Russia, King Frederick IV of Denmark and Augustus II the Strong, King of Poland and Elector of Saxony. Sweden's ruler is the militaristic Charles XII, known as the quotSwedish Meteorquot.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "c1befe36-4dd7-456a-b9e5-46499cfcc639"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "418",
+      "description": "Emperor Honorius bribes Wallia, king of the Visigoths, into regaining Hispania for the Roman Empire. His victory over the Vandals in 416, forces him to retire to Andalusia. The Visigothic territory in Gaul now extends from the Garonne to the Loire, and becomes known as the Visigothic Kingdom.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "c9ee25a1-2bc9-44e3-9bcf-9db1288f776c"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "524/05/01",
+      "description": " King Sigismund is executed at Orléans after an 8-year reign and is succeeded by his brother Godomar. He rallies the Burgundian army and begins plundering Frankish territory.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "98855d98-7bd7-4a40-a3a1-4c1a38783300"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "476/09/04",
+      "description": "The Visigoths under king Euric march into Italy and suffer defeat against the forces of Odoacer. Emperor Zeno concludes a peace treaty between the Goths and Odoacer surrenders the newly conquered territory in Gaul. Euric pledged himself to undertake no further hostilities.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "01419c45-7a26-46c8-a032-55f38ff7cf63"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "509",
+      "description": "Clovis I (''Chlodowech'') becomes the first Catholic king of the Franks and unites all the Frankish tribes under his rule. He controls an immense territory in Gaul (modern France) and delivers a major blow for the Church against the Arian heresy.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "af89cba4-263d-4c27-9477-274763346765"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "496",
+      "description": "Battle of Tolbiac: King Clovis I defeats the Alamanni at Zülpich (Germany). Gibuld, last king of the Alamanni, is killed in battle and the territory is incorporated into the Frankish Kingdom.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "35951b16-7694-4de1-b10f-dbf6b8d7298f"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "874",
+      "description": "The territory of the Vistulans is conquered by King Svatopluk I of Great Moravia.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "cea4c3ce-472c-4645-9fd1-ff88aed4162d"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "629",
+      "description": "Dagobert I becomes king of all of the Frankish territory.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "6ae08031-4afe-4857-a03e-e7a0c2711acc"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "415",
+      "description": "The Visigoths invade the Iberian Peninsula and begin to conquer territory taken previously by the Vandals. King Ataulf and his pregnant wife Galla Placidia leave Gallia Narbonensis, they relocate at Barcelona. Their infant son, Theodosius, dies in infancy, eliminating an opportunity for a Roman-Visigothic line. Ataulf is assassinated in the palace while taking a bath. Sigeric succeeds him, but after a reign for seven days he is also murdered.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "c0ee403f-1eb8-45b1-8992-94bd5949d363"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "339",
+      "description": "Emperor Constantius II hastens to his territory in the East, where a revived Persia under king Shapur II is attacking Mesopotamia. For the next 11 years the two powers engage in a war of border skirmishing with no real victor.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "af7d671f-1847-42aa-9ec7-ba7b9e6b3b9f"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "882",
+      "description": "Louis the Younger, king of Saxony dies, leaving his territory to his brother, the emperor Charles the Fat.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "a41ff021-2f4e-4334-bac4-07ab2380cd02"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "-206",
+      "description": "Arsaces II, king of the Parthians, loses territory in battles with Euthydemus I, ruler of Bactria.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "47d7ce3d-5f1b-446b-8125-11bbb51f8450"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "1152/05/18",
+      "description": " Eleanor of Aquitaine marries Henry of Anjou after getting her previous marriage to Louis VII annulled.  Henry had claimed the County of Anjou, the County of Maine, and the province of Touraine upon the death of his protector Geoffrey Plantagenet, Count of Anjou, the previous year.  With the addition of Eleanor's lands, he now controls territory stretching unbroken from Cherbourg to Bayonne.''King John'' by Warren.  Published by the University of California Press in 1961.  p. 21",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "dd9446b0-a51f-4543-8cc2-49c35d14f9ee"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Bactria",
+      "date": "-159",
+      "description": "While Eucratides I is in north west India to claim possession of the previous Bactrian King Demetrius I's territory there, the Parthians, under Mithradates I, annex two Bactrian provinces. Returning from India to reconquer them, Eucratides is murdered by his son.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "9801c312-7670-4260-9618-ce273779a692"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Seleucid Empire",
+      "date": "-218/12/18",
+      "description": "Negotiations between the new Egyptian King Ptolemy IV and the Seleucid King Antiochus III collapse, and Antiochus III renews his advance, overrunning Ptolemy's forward defences. Antiochus III gains territory in Lebanon, Palestine and Phoenicia.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "87e5519a-e384-475b-9181-f4b214202574"
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Greece",
+      "date": "-210",
+      "description": "After allying with Hannibal, Philip V of Macedon attacks the Roman positions in Illyria, but fails to take Corcyra or Apollonia, which are protected by the Roman fleet. Rome's command of the sea prevents his lending any effective aid to his Carthaginian ally in Italy. The Aetolians, Sparta and King Attalus of Pergamum join the Romans in the war against Philip V. This coalition is so strong that Philip V has to stop attacking Roman territory.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "24e25a85-4412-4344-b620-452d95d47064"
+  },
+  {
+    "_default": {
+      "category1": "May",
+      "date": "1940/05/24",
+      "description": "WWII: King Leopold III of Belgium orders the Belgian forces to cease fighting. Leaders of the Belgian government on French territory declare Leopold deposed.",
+      "granularity": "year",
+      "lang": "en"
+    },
+    "id": "0d50a5c2-089a-4e2f-9f0d-9134b0fe0024"
+  }
+]

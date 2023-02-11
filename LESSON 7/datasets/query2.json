@@ -1,0 +1,52 @@
+[
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "241",
+      "description": "The ancient city of Bagram (Afghanistan) is abandoned.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "241",
+      "description": "Shapur I succeeds his father Ardashir I as king of Persia.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "241",
+      "description": "Shapur I annexes parts of the Kushan Empire.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "242",
+      "description": "Shapur I makes a pre-emptive attack on Antioch to drive out the Romans. Gordian's father-in-law, Timesitheus, leads a Roman army to defeat the Persians at Carrhae and Nisibis.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "251/07/01",
+      "description": "The Sassanid king, Shapur I, orders an invasion of the Roman East with the intent of finally capturing the jewel of Syria, Antioch (251–254).",
+      "granularity": "year",
+      "lang": "en"
+    }
+  }
+]

@@ -1,0 +1,51 @@
+networks:
+  net0:
+    driver: bridge
+
+services:
+  couch1:
+    image: couchbase:7.0.5
+    ports:
+      - "8091-8096:8091-8096"
+      - "11210-11211:11210-11211"
+    container_name: couch1
+    networks:
+      - "net0"
+    volumes:
+      - /home/couch_cluster/couch1:/opt/couchbase/var
+  couch2:
+    image: couchbase:7.0.5
+    container_name: couch2
+    networks:
+      - "net0"
+    volumes:
+      - /home/couch_cluster/couch2:/opt/couchbase/var
+    depends_on:
+      - couch1
+  couch3:
+    image: couchbase:7.0.5
+    container_name: couch3
+    networks:
+      - "net0"
+    volumes:
+      - /home/couch_cluster/couch3:/opt/couchbase/var
+    depends_on:
+      - couch2
+  couch4:
+    image: couchbase:7.0.5
+    container_name: couch4
+    networks:
+      - "net0"
+    volumes:
+      - /home/couch_cluster/couch4:/opt/couchbase/var
+    depends_on:
+      - couch3
+  couch5:
+    image: couchbase:7.0.5
+    container_name: couch5
+    networks:
+      - "net0"
+    volumes:
+      - /home/couch_cluster/couch5:/opt/couchbase/var
+    depends_on:
+      - couch4

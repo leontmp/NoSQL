@@ -1,0 +1,159 @@
+[
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "476/09/04",
+      "description": "The Visigoths under king Euric march into Italy and suffer defeat against the forces of Odoacer. Emperor Zeno concludes a peace treaty between the Goths and Odoacer surrenders the newly conquered territory in Gaul. Euric pledged himself to undertake no further hostilities.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "Date unknown",
+      "date": "1868/12/25",
+      "description": "The Roman Catholic See of Tucson is established as the Apostolic Vicariate of Arizona in 1868, taking its territory from the former Diocese of Santa Fe. The Diocese of Tucson is canonically erected on May 8, 1897.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Greece",
+      "date": "-210",
+      "description": "After allying with Hannibal, Philip V of Macedon attacks the Roman positions in Illyria, but fails to take Corcyra or Apollonia, which are protected by the Roman fleet. Rome's command of the sea prevents his lending any effective aid to his Carthaginian ally in Italy. The Aetolians, Sparta and King Attalus of Pergamum join the Romans in the war against Philip V. This coalition is so strong that Philip V has to stop attacking Roman territory.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Greece",
+      "date": "-211",
+      "description": "The Roman commander Marcus Valerius Laevinus explores the possibility of an alliance with the Aetolian League as the Aetolians are once again ready to consider taking up arms against their traditional enemy, Macedonia. A treaty is signed to counter Philip V of Macedon who is allied to Hannibal. Under the treaty, the Aetolians are to conduct operations on land, the Romans at sea. Also, Rome will keep any slaves and other booty taken and Aetolia will receive control of any territory acquired.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "496",
+      "description": "Battle of Tolbiac: King Clovis I defeats the Alamanni at Zülpich (Germany). Gibuld, last king of the Alamanni, is killed in battle and the territory is incorporated into the Frankish Kingdom.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Persia",
+      "date": "-206",
+      "description": "Arsaces II, king of the Parthians, loses territory in battles with Euthydemus I, ruler of Bactria.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "January&amp;amp;amp;ndash;March",
+      "date": "1848/01/31",
+      "description": "Mexican–American War formally ends, making the unincorporated, unorganized California Territory a provisional official possession: The Treaty of Guadalupe Hidalgo is signed, ending the war and ceding to the United States virtually all of what is today the southwest United States. California is never organized by congress as a territory, but passes the requirements directly for statehood in 1850. Some even today claim this treaty did not include Texas, over the annexation of which the quarrel began.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "April&amp;amp;amp;ndash;June",
+      "date": "1898/06/21",
+      "description": " Spanish–American War: The United States captures Guam making it the first U.S. overseas territory.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "629",
+      "description": "Dagobert I becomes king of all of the Frankish territory.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Asia",
+      "date": "-111",
+      "description": "The Han Empire annexes the Vietnamese kingdom of Nam Viet, and thereby extends its territory to modern-day North Vietnam.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "39",
+      "description": "Agrippa I, king of Judaea, successfully accuses Herod Antipas, tetrarch of Galilee and Perea, of conspiracy against Caligula. Antipas is exiled and Agrippa receives his territory.ampampJosephus, ''Antiquities of the Jews'' <a href=\"http://www.perseus.tufts.edu/cgi-bin/ptext?lookup=J.+AJ+18.247\">http://www.perseus.tufts.edu/cgi-bin/ptext?lookup=J.+AJ+18.247</a> 18.247ampampndash252 {{cite journal |last=Bruce |first=F. F. |authorlink=F. F. Bruce |year=1963/1965 |title=Herod Antipas, Tetrarch of Galilee and Peraea |journal=Annual of Leeds University Oriental Society |volume=5 |pages=6ampampndash23, p. 21 |url=<a href=\"http://www.biblicalstudies.org.uk/pdf/herod_bruce.pdf\">http://www.biblicalstudies.org.uk/pdf/herod_bruce.pdf</a> |format=PDF |accessdate=2007-10-21 }}ampamp",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "882",
+      "description": "Louis the Younger, king of Saxony dies, leaving his territory to his brother, the emperor Charles the Fat.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "509",
+      "description": "Clovis I (''Chlodowech'') becomes the first Catholic king of the Franks and unites all the Frankish tribes under his rule. He controls an immense territory in Gaul (modern France) and delivers a major blow for the Church against the Arian heresy.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Roman Empire",
+      "date": "418",
+      "description": "Emperor Honorius bribes Wallia, king of the Visigoths, into regaining Hispania for the Roman Empire. His victory over the Vandals in 416, forces him to retire to Andalusia. The Visigothic territory in Gaul now extends from the Garonne to the Loire, and becomes known as the Visigothic Kingdom.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Dacia",
+      "date": "-82",
+      "description": "Burebista unifies the Dacian population forming the first (and biggest) unified Dacian kingdom, on the territory of modern Romania and surroundings. 82 BC is also the starting year of his reign.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "_default": {
+      "category1": "By place",
+      "category2": "Sicily",
+      "date": "-259",
+      "description": "The Carthaginians under Hamilcar take advantage of their victory at Thermae in Sicily by counterattacking the Romans and seizing Enna. Hamilcar continues south to Camarina, in Syracusan territory, to try to convince the Syracusans to rejoin the Carthaginian side.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  }
+]

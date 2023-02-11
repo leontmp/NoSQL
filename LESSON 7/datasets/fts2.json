@@ -1,0 +1,44 @@
+[
+  {
+    "id": "294b29fa-56a1-44ba-b300-206e74b52190",
+    "t1": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "984",
+      "description": "Henry II, Duke of Bavaria abducts the child king Otto III.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "id": "5ad4fcc0-8171-496e-926f-31839c98b559",
+    "t1": {
+      "category1": "November",
+      "date": "1913/11/05",
+      "description": " The insane King Otto of Bavaria is deposed by his cousin, Prince Regent Ludwig, who assumes the title Ludwig III.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "id": "a0b438e0-e542-4cf3-8f2f-3f5e46e8e402",
+    "t1": {
+      "category1": "By place",
+      "category2": "Europe",
+      "date": "953",
+      "description": "Liudolf, Duke of Swabia and Conrad the Red rebel against German King Otto I.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  },
+  {
+    "id": "507c2d3c-3ba0-4e3e-9827-749cadc431ad",
+    "t1": {
+      "category1": "July&amp;amp;amp;ndash;September",
+      "date": "1843/09/03",
+      "description": " Popular uprising in Athens, Greece, including citizens and military captains, to require from King Otto to issue a liberal Constitution to the state, which was governed since independence (1830) by various domestic and foreign centres of profits.",
+      "granularity": "year",
+      "lang": "en"
+    }
+  }
+]

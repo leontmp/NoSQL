@@ -1,5 +1,7 @@
 ﻿**Развернуть кластер Couchbase**
+
 **Создать БД, наполнить небольшими тестовыми данными**
+
 **Проверить отказоустойчивость**
 
 Разворачиваем кластер из 5 нод на виртуальной машине (*RAM 8Gb, AMD  Ryzen 5 4600H  3.00 GHz, 6 CPU  cores*).
@@ -35,10 +37,15 @@ for i in {1..5}; do docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPA
 ```
 ## Собираем кластер
 Кластер будет содержать следующюю конфигурацию сервисов:
+
 **couch1** - data
+
 **couch2** - data, query
+
 **couch3** - data, index
+
 **couch4** - index, query
+
 **couch5** - analytisc, search, backup, eventing
 
 Заходим в контейнер с первой нодой, будем работать с ```couchbase-cli``` (там она уже установлена).
@@ -119,9 +126,9 @@ SELECT category1, count(*) as cnt FROM `history`._default._default group by cate
 select *
 from (select distinct category1, category2 from `history`._default._default) record
 inner nest (
-	select row_number() over (partition by category1, category2 order by description) as n, id, category1, category2, date, description, granularity, lang
-	from `history`._default._default 
-	where description!='' and category1!=''
+  select row_number() over (partition by category1, category2 order by description) as n, id, category1, category2, date, description, granularity, lang
+  from `history`._default._default
+  where description!='' and category1!=''
 ) events on record.category1=events.category1 and record.category2=events.category2
 where n<=3
 ```
@@ -151,10 +158,11 @@ SELECT * FROM `history`._default._default where meta().id='00206818-4357-4e18-ae
 Добавим регистрацию событий (например, на удаление записи из коллекции **history**). Создадим отдельный бакет **historylog**, куда будем сбрасывать записи.
 
 ![Couchbase. Eventing](img/7.png)
+
 И пропишем код на регистрацию факта удаления документа из коллекции, записывать будем id документа.
 ```
 function OnDelete(meta, options) {
-	log("Doc deleted", meta.id);
+  log("Doc deleted", meta.id);
 }
 ```
 ![Couchbase. Eventing, deploy function](img/8.png)
@@ -163,8 +171,9 @@ function OnDelete(meta, options) {
 ```
 delete from `history`._default._default d0 where [meta().id] in (select raw [meta().id] as del_id from `history`._default._default d1 where category1="Date unknown" limit 1)
 ```
-Можем посмотреть график событий. 
+Можем посмотреть график событий.
 ![Couchbase. Eventing, chart](img/9.png)
+
 Либо открываем Log и видим результаты срабатывания функции.
 ```
 2023-02-01T21:18:08.390+00:00 [INFO] "Doc deleted" "006ea2bd-ffc1-414d-8768-8434eb55d847"
@@ -185,7 +194,7 @@ delete from `history`._default._default d0 where [meta().id] in (select raw [met
 
 ![Couchbase. Backup, setup2](img/6.png)
 
-Через несколько дней проверяем что бэкапирование проходит. 
+Через несколько дней проверяем что бэкапирование проходит.
 В UI можно посмотреть статистические подробности, а на выделенном volume под ноду **couch5** проверить наличие самих файлов.
 ![Couchbase. Backup, UI](img/6_1.png)
 ```
@@ -214,13 +223,14 @@ select meta().id, * from `history`._default._default where search(description, "
 SELECT META().id, * FROM `history`._default._default as t1 WHERE SEARCH(t1, {"query": {"match_phrase": "King Otto"}, "fields":["description"]});
 ```
 [fts2.json](datasets/fts2.json)
+
 Тот же поиск сделаем через REST  API:
 ```
 curl -XPOST -H "Content-Type: application/json" -u admin:Passw0rd! http://172.27.0.6:8094/api/index/FTS_index_description/query -d '{
-	"query": {
-		"match_phrase": "King Otto"
-	},
-	"fields":["description"]
+  "query": {
+    "match_phrase": "King Otto"
+  },
+  "fields":["description"]
 }'
 ```
 [fts3.json](datasets/fts3.json)
@@ -229,19 +239,24 @@ curl -XPOST -H "Content-Type: application/json" -u admin:Passw0rd! http://172.27
 
 Настраиваем оповещения на электронный ящик перед тем, как проводить отключение нод:
 ![Couchbase. Alerts](img/11.png)
+
 Выставляем  в  настройках: *“Auto-failover after **30** seconds for up to **1** event”*.
-По текущей конфигурации кластера *Auto-failover* (нода недоступна, но сервис продолжит работать без вмешательства DBA, т.е. будет время на решение проблем с нодой) отработает на **couch1-couch4** (так как выполняется требование Couchbase  по минимальному кол-ву нод на сервисы *data=3, index=2, query=2*) и не отработает на **couch5** (fts, eventing, analytics, backup  запущены сейчас на одной, нужно для Auto-failover  минимум 2). [Automatic Failover settings](https://docs.couchbase.com/server/current/learn/clusters-and-availability/automatic-failover.html#failover-policy)
+
+По текущей конфигурации кластера *Auto-failover* (нода недоступна, но сервис продолжит работать без вмешательства DBA, т.е. будет время на решение проблем с нодой) отработает на **couch1-couch4** (так как выполняется требование Couchbase  по минимальному кол-ву нод на сервисы *data=3, index=2, query=2*) и не отработает на **couch5** (fts, eventing, analytics, backup  запущены сейчас на одной, нужно для Auto-failover  минимум 2) (подробности в мануале [Automatic Failover settings](https://docs.couchbase.com/server/current/learn/clusters-and-availability/automatic-failover.html#failover-policy)).
 
 ### 1 тест:
 Роняем ноду **couch3** (data, index): ```docker stop couch3```
+
 Пришло письмо:  ```Node ('ns_1@172.27.0.4') was automatically failed over. Reason: All monitors report node is unhealthy```.
 
-Что можно сделать.
+Что можно сделать:
 > 1 вариант (нода серьезна вышла из строя, нужно выводить из кластера)
 
 ![Couchbase. Couch3 stoped](img/12.png)
+
 Заходим в UI, никакие действия с нодой уже недоступны, поэтому делаем **Rebalance** (данные перераспределяются), нода исчезает из кластера.
 ![Couchbase. Couch3 rebalanced](img/17.png)
+
 Если через какое-то время удастся восстановить ноду, её придется добавлять в кластер вручную.
 ```
 docker start couch3
@@ -250,22 +265,25 @@ docker exec couch1 -it /bin/bash
 couchbase-cli server-add -c 172.27.0.2:8091 --username admin --password Passw0rd! --server-add https://172.27.0.4:18091 --server-add-username admin --server-add-password Passw0rd! --services data,index
 SUCCESS: Server added
 couchbase-cli rebalance -c 172.27.0.2:8091 --username admin --password Passw0rd!
-Rebalancing                                                                                                                                                                                                
+Rebalancing
 Bucket: 02/02 (historylog)                                                                                                                                                                 0 docs remaining
-[===========================================================] 100.00%
+[=============================================================+========] 100.00%
 SUCCESS: Rebalance complete
 ```
+
 > 2 вариант (временная недоступность ноды, ждем подключения)
 
-Допустим, через какое-то время связь появилась и нода стала вновь пингуема. 
+Допустим, через какое-то время связь появилась, и нода стала вновь пингуема.
 ```
 docker  start  couch3
 ```
 ![Couchbase. Couch3 restored](img/13.png)
+
 В UI  рядом с нодой появляются кнопки **Add  Back: Full  Recovery**, **Add  Back: Delta  Recovery** (жмем её). Потом запускаем **Rebalance**  и она вернулась в кластер.
 
 ### 2 тест:
 Останавливаем  ноду **couch5** (с сервисами fts, eventing, analytics, backup) без Auto-Failover: ```docker  stop  couch5```
+
 Получаем письмо ```Could not auto-failover node ('ns_1@172.27.0.6'). Number of remaining nodes that are running backup service is 0. You need at least 1 nodes.```
 
 Пытаемся выполнить поиск FTS:
@@ -279,12 +297,15 @@ docker  start  couch5
 ### 3 тест:
 
 Роняем ноду **couch1** (data), на которой инициализирован весь кластер: ```docker  stop couch1```
+
 Падает весь кластер. Письма: ```Node ('ns_1@172.27.0.2') was automatically failed over. Reason: All monitors report node is unhealthy.```
 
 ![Couchbase. Couch1 stoped](img/16.png)
 
-Восстанавливаем ноду ```docker  start  couch1``` 
-Кластер поднимается. 
+Восстанавливаем ноду ```docker  start  couch1```
+
+Кластер поднимается.
+
 Логинимся заново в кластере и восстанавливаем ноду уже знакомым путем **Add Back: Delta Recovery** + **Rebalance**.
 
 
